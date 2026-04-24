@@ -17,17 +17,38 @@ public abstract class Carta {
         Incolor
     }
 
-    public String getSimbol() {return simbol;}
-    public Color getColor() {return color;}
+    public String getSimbol() {
+        return simbol;
+    }
+
+    public Color getColor() {
+        return color;
+    }
 
     public boolean sonCartesCompatibles(Carta carta) {
         boolean colorsIguals = color == carta.getColor();
+
         if (color == Color.Incolor || carta.getColor() == Color.Incolor) {
             colorsIguals = true;
         }
-        boolean numerosIguals = Objects.equals(simbol, carta.getSimbol());
 
-        return colorsIguals || numerosIguals;
+        boolean simbolIgual = Objects.equals(simbol, carta.getSimbol());
+
+        return colorsIguals || simbolIgual;
+    }
+
+    public boolean esCompatibleAmb(Carta altra) {
+        if (altra == null) return true;
+
+        boolean colorIgual = this.color == altra.getColor();
+
+        if (this.color == Color.Incolor || altra.getColor() == Color.Incolor) {
+            colorIgual = true;
+        }
+
+        boolean simbolIgual = Objects.equals(this.simbol, altra.getSimbol());
+
+        return colorIgual || simbolIgual;
     }
 
     public void accio() {}

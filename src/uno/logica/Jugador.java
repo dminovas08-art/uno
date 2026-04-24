@@ -21,6 +21,10 @@ public class Jugador {
     }
 
     public void tirarCarta(Carta carta, Pilo pilo) {
+        if (carta == null) {
+            System.out.println("El jugador passa torn");
+            return;
+        }
         cartes.remove(carta);
         pilo.addCarta(carta);
         carta.accio();
