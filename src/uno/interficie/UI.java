@@ -155,30 +155,30 @@ public class UI {
     }
 
     public static Carta demanarCarta(Jugador jugador, Pilo pilo) {
-        mostrarMa(jugador);
-        System.out.print("Vols passar torn? (si/no): ");
-        String resposta = input.nextLine();
-
-        if (resposta.equals("si")) {
-            return null;
-        }
-        mostrarMa(jugador);
 
         do {
-            System.out.print("Escull una carta: ");
-            int indexCartaEscollida = input.nextInt();
+            String resposta="";
+            mostrarMa(jugador);
+            System.out.print("Vols passar torn? (si/no): ");
+            resposta = input.next();
+            if (resposta.equals("si")) {
+                return null;
+            }else{
+                System.out.print("Escull una carta: ");
+                int indexCartaEscollida = input.nextInt();
+                if (indexCartaEscollida > 0 && indexCartaEscollida <= jugador.nombreDeCartes()) {
+                    Carta cartaEscollida = jugador.getCartes().get(indexCartaEscollida - 1);
 
-            if (indexCartaEscollida > 0 && indexCartaEscollida <= jugador.nombreDeCartes()) {
-                Carta cartaEscollida = jugador.getCartes().get(indexCartaEscollida - 1);
-
-                if (cartaEscollida.sonCartesCompatibles(pilo.consultarCarta())) {
-                    return cartaEscollida;
+                    if (cartaEscollida.sonCartesCompatibles(pilo.consultarCarta())) {
+                        return cartaEscollida;
+                    } else {
+                        System.out.println("Aquesta carta no coincideix amb l'última del pilo!");
+                    }
                 } else {
-                    System.out.println("Aquesta carta no coincideix amb l'última del pilo!");
+                    System.out.println("ERROR: Has escollit una posició no vàlida");
                 }
-            } else {
-                System.out.println("ERROR: Has escollit una posició no vàlida");
             }
+
         } while (true);
     }
 
